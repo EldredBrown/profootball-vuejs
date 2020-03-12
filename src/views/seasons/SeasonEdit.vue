@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="content-container">
     <div class="section content-title-group">
-      <h2 class="title">{{ title }}</h2>
+      <h2 class="title">Season</h2>
       <div class="card">
         <header class="card-header">
-          <p class="card-header-title">{{ season.year }}</p>
+          <p class="card-header-title">{{title}}</p>
         </header>
         <div class="card-content">
           <div class="content">
@@ -93,7 +93,7 @@ import { mapActions, mapGetters } from 'vuex';
 import { cloneDeep } from 'lodash';
 
 export default {
-  name: 'SeasonDetail',
+  name: 'SeasonEdit',
   props: {
     id: {
       type: Number,
@@ -123,20 +123,20 @@ export default {
       return !this.id;
     },
     title() {
-      return `${this.isAddMode ? 'Add' : 'Edit'} Season`;
+      return `${this.isAddMode ? 'Add' : 'Edit'}`;
     }
   },
   methods: {
     ...mapActions(['addSeasonAction', 'updateSeasonAction']),
     cancelSeason() {
-      this.$router.push({ name: 'SeasonsIndex' });
+      this.$router.push({ name: 'SeasonIndex' });
     },
     async saveSeason() {
       this.validateInput();
       this.season.id
         ? await this.updateSeasonAction(this.season)
         : await this.addSeasonAction(this.season);
-      this.$router.push({ name: 'SeasonsIndex' });
+      this.$router.push({ name: 'SeasonIndex' });
     },
     validateInput() {
       this.season.year = parseInt(this.season.year);

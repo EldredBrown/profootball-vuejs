@@ -2,6 +2,67 @@ import * as axios from 'axios';
 
 import { API } from './config';
 
+async function getLeagues() {
+  try {
+    const response = await axios.get(`${API}/leagues`);
+
+    let data = parseList(response);
+
+    const leagues = data.map(s => {
+      return s;
+    });
+
+    return leagues;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+async function getLeague(id) {
+  try {
+    const response = await axios.get(`${API}/leagues/${id}`);
+    let league = parseItem(response, 200);
+    return league;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function addLeague(league) {
+  try {
+    const response = await axios.post(`${API}/leagues`, league);
+    const addedLeague = parseItem(response, 201);
+    return addedLeague;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function updateLeague(league) {
+  try {
+    const response = await axios.put(`${API}/leagues/${league.id}`, league);
+    const updatedLeague = parseItem(response, 200);
+    return updatedLeague;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function deleteLeague(league) {
+  try {
+    const response = await axios.delete(`${API}/leagues/${league.id}`);
+    parseItem(response, 200);
+    return league.id;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 async function getSeasons() {
   try {
     const response = await axios.get(`${API}/seasons`);
@@ -30,7 +91,7 @@ async function getSeason(id) {
   }
 }
 
-const addSeason = async function (season) {
+async function addSeason(season) {
   try {
     const response = await axios.post(`${API}/seasons`, season);
     const addedSeason = parseItem(response, 201);
@@ -39,7 +100,7 @@ const addSeason = async function (season) {
     console.error(error);
     return null;
   }
-};
+}
 
 async function updateSeason(season) {
   try {
@@ -52,7 +113,7 @@ async function updateSeason(season) {
   }
 }
 
-const deleteSeason = async function (season) {
+async function deleteSeason(season) {
   try {
     const response = await axios.delete(`${API}/seasons/${season.id}`);
     parseItem(response, 200);
@@ -61,7 +122,7 @@ const deleteSeason = async function (season) {
     console.error(error);
     return null;
   }
-};
+}
 
 function parseList(response) {
   if (response.status !== 200) {
@@ -98,5 +159,10 @@ export const dataService = {
   getSeason,
   addSeason,
   updateSeason,
-  deleteSeason
+  deleteSeason,
+  getLeagues,
+  getLeague,
+  addLeague,
+  updateLeague,
+  deleteLeague
 };

@@ -13,14 +13,37 @@ const routes = [
     component: () => import(/* webpackChunkName: "bundle.home" */ '../views/Home')
   },
   {
-    path: '/seasons',
-    name: 'SeasonsIndex',
-    component: () => import(/* webpackChunkName: "bundle.seasons" */ '../views/SeasonsIndex')
+    path: '/seasons/index',
+    name: 'SeasonIndex',
+    component: () => import(/* webpackChunkName: "bundle.seasons" */ '../views/seasons/SeasonIndex')
   },
   {
-    path: '/seasons/:id',
-    name: 'SeasonDetail',
-    component: () => import(/* webpackChunkName: "bundle.seasons" */ '../views/SeasonDetail'),
+    path: '/seasons/details/:id',
+    name: 'SeasonDetails',
+    component: () => import(/* webpackChunkName: "bundle.seasons" */ '../views/seasons/SeasonDetails'),
+    props: parseProps,
+  },
+  {
+    path: '/seasons/edit/:id',
+    name: 'SeasonEdit',
+    component: () => import(/* webpackChunkName: "bundle.seasons" */ '../views/seasons/SeasonEdit'),
+    props: parseProps,
+  },
+  {
+    path: '/leagues/index',
+    name: 'LeagueIndex',
+    component: () => import(/* webpackChunkName: "bundle.leagues" */ '../views/leagues/LeagueIndex')
+  },
+  {
+    path: '/leagues/details/:id',
+    name: 'LeagueDetails',
+    component: () => import(/* webpackChunkName: "bundle.leagues" */ '../views/leagues/LeagueDetails'),
+    props: parseProps,
+  },
+  {
+    path: '/leagues/edit/:id',
+    name: 'LeagueEdit',
+    component: () => import(/* webpackChunkName: "bundle.leagues" */ '../views/leagues/LeagueEdit'),
     props: parseProps,
   },
   {
