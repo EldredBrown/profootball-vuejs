@@ -6,3 +6,7 @@ export const GET_SEASONS = 'getSeasons';
 export const ADD_SEASON = 'addSeason';
 export const UPDATE_SEASON = 'udpateSeason';
 export const DELETE_SEASON = 'deleteSeason';
+export const GET_TEAMS = 'getTeams';
+export const ADD_TEAM = 'addTeam';
+export const UPDATE_TEAM = 'udpateTeam';
+export const DELETE_TEAM = 'deleteTeam';

@@ -124,6 +124,67 @@ async function deleteSeason(season) {
   }
 }
 
+async function getTeams() {
+  try {
+    const response = await axios.get(`${API}/teams`);
+
+    let data = parseList(response);
+
+    const teams = data.map(s => {
+      return s;
+    });
+
+    return teams;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+
+async function getTeam(id) {
+  try {
+    const response = await axios.get(`${API}/teams/${id}`);
+    let team = parseItem(response, 200);
+    return team;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function addTeam(team) {
+  try {
+    const response = await axios.post(`${API}/teams`, team);
+    const addedTeam = parseItem(response, 201);
+    return addedTeam;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function updateTeam(team) {
+  try {
+    const response = await axios.put(`${API}/teams/${team.id}`, team);
+    const updatedTeam = parseItem(response, 200);
+    return updatedTeam;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+async function deleteTeam(team) {
+  try {
+    const response = await axios.delete(`${API}/teams/${team.id}`);
+    parseItem(response, 200);
+    return team.id;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 function parseList(response) {
   if (response.status !== 200) {
     throw Error(response.message);
@@ -155,14 +216,19 @@ function parseItem(response, code) {
 }
 
 export const dataService = {
+  getLeagues,
+  getLeague,
+  addLeague,
+  updateLeague,
+  deleteLeague,
   getSeasons,
   getSeason,
   addSeason,
   updateSeason,
   deleteSeason,
-  getLeagues,
-  getLeague,
-  addLeague,
-  updateLeague,
-  deleteLeague
+  getTeams,
+  getTeam,
+  addTeam,
+  updateTeam,
+  deleteTeam,
 };

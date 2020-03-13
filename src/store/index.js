@@ -10,14 +10,19 @@ import {
   GET_SEASONS,
   ADD_SEASON,
   UPDATE_SEASON,
-  DELETE_SEASON
+  DELETE_SEASON,
+  GET_TEAMS,
+  ADD_TEAM,
+  UPDATE_TEAM,
+  DELETE_TEAM
 } from './mutation-types';
 
 Vue.use(Vuex);
 
 const state = {
   leagues: [],
-  seasons: []
+  seasons: [],
+  teams: [],
 };
 
 const mutations = {
@@ -52,7 +57,23 @@ const mutations = {
   [DELETE_SEASON](state, seasonId) {
     // TODO: Explore other ways to delete the selected state.
     state.seasons = [...state.seasons.filter(s => s.id !== seasonId)];
-  }
+  },
+  [GET_TEAMS](state, teams) {
+    state.teams = teams;
+  },
+  [ADD_TEAM](state, team) {
+    state.teams.push(team);
+  },
+  [UPDATE_TEAM](state, team) {
+    // TODO: Explore other ways to edit the selected state.
+    const index = state.teams.findIndex(s => s.id === team.id);
+    state.teams.splice(index, 1, team);
+    state.teams = [...state.teams];
+  },
+  [DELETE_TEAM](state, teamId) {
+    // TODO: Explore other ways to delete the selected state.
+    state.teams = [...state.teams.filter(s => s.id !== teamId)];
+  },
 };
 
 const actions = {
@@ -87,12 +108,29 @@ const actions = {
   async deleteSeasonAction({ commit }, season) {
     const deletedSeasonId = await dataService.deleteSeason(season);
     commit(DELETE_SEASON, deletedSeasonId);
-  }
+  },
+  async getTeamsAction({ commit }) {
+    const teams = await dataService.getTeams();
+    commit(GET_TEAMS, teams);
+  },
+  async addTeamAction({ commit }, team) {
+    const addedTeam = await dataService.addTeam(team);
+    commit(ADD_TEAM, addedTeam);
+  },
+  async updateTeamAction({ commit }, team) {
+    const updatedTeam = await dataService.updateTeam(team);
+    commit(UPDATE_TEAM, updatedTeam);
+  },
+  async deleteTeamAction({ commit }, team) {
+    const deletedTeamId = await dataService.deleteTeam(team);
+    commit(DELETE_TEAM, deletedTeamId);
+  },
 };
 
 const getters = {
   getLeagueById: state => id => state.leagues.find(l => l.id === id),
-  getSeasonById: state => id => state.seasons.find(s => s.id === id)
+  getSeasonById: state => id => state.seasons.find(s => s.id === id),
+  getTeamById: state => id => state.teams.find(t => t.id === id),
 };
 
 const store = new Vuex.Store({
