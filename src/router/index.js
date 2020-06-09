@@ -13,6 +13,31 @@ const routes = [
     component: () => import(/* webpackChunkName: "bundle.home" */ '../views/Home'),
   },
   {
+    path: '/games/index',
+    name: 'GameIndex',
+    component: () => import(/* webpackChunkName: "bundle.games" */ '../views/games/GameIndex'),
+  },
+  {
+    path: '/games/details/:id',
+    name: 'GameDetails',
+    component: () => import(/* webpackChunkName: "bundle.games" */ '../views/games/GameDetails'),
+    props: parseProps,
+  },
+  {
+    path: '/games/edit/:id',
+    name: 'GameEdit',
+    component: () => import(/* webpackChunkName: "bundle.games" */ '../views/games/GameEdit'),
+    props: parseProps,
+  },
+  {
+    path: '/game-predictor/predict-game',
+    name: 'PredictGame',
+    component: () => import(
+      /* webpackChunkName: "bundle.game-predictor" */ '../views/game-predictor/PredictGame'
+    ),
+    props: parseProps,
+  },
+  {
     path: '/leagues/index',
     name: 'LeagueIndex',
     component: () => import(/* webpackChunkName: "bundle.leagues" */ '../views/leagues/LeagueIndex'),
@@ -27,6 +52,23 @@ const routes = [
     path: '/leagues/edit/:id',
     name: 'LeagueEdit',
     component: () => import(/* webpackChunkName: "bundle.leagues" */ '../views/leagues/LeagueEdit'),
+    props: parseProps,
+  },
+  {
+    path: '/league-seasons/index',
+    name: 'LeagueSeasonIndex',
+    component: () => import(/* webpackChunkName: "bundle.league-seasons" */ '../views/league-seasons/LeagueSeasonIndex'),
+  },
+  {
+    path: '/league-seasons/details/:id',
+    name: 'LeagueSeasonDetails',
+    component: () => import(/* webpackChunkName: "bundle.league-seasons" */ '../views/league-seasons/LeagueSeasonDetails'),
+    props: parseProps,
+  },
+  {
+    path: '/league-seasons/edit/:id',
+    name: 'LeagueSeasonEdit',
+    component: () => import(/* webpackChunkName: "bundle.league-seasons" */ '../views/league-seasons/LeagueSeasonEdit'),
     props: parseProps,
   },
   {
@@ -47,6 +89,11 @@ const routes = [
     props: parseProps,
   },
   {
+    path: '/season-standings/index',
+    name: 'SeasonStandingsIndex',
+    component: () => import(/* webpackChunkName: "bundle.season-standings" */ '../views/season-standings/SeasonStandingsIndex'),
+  },
+  {
     path: '/teams/index',
     name: 'TeamIndex',
     component: () => import(/* webpackChunkName: "bundle.teams" */ '../views/teams/TeamIndex'),
@@ -61,6 +108,34 @@ const routes = [
     path: '/teams/edit/:id',
     name: 'TeamEdit',
     component: () => import(/* webpackChunkName: "bundle.teams" */ '../views/teams/TeamEdit'),
+    props: parseProps,
+  },
+  {
+    path: '/team-seasons-admin/index',
+    name: 'TeamSeasonAdminIndex',
+    component: () => import(/* webpackChunkName: "bundle.team-seasons-admin" */ '../views/team-seasons-admin/TeamSeasonIndex'),
+  },
+  {
+    path: '/team-seasons-admin/details/:id',
+    name: 'TeamSeasonAdminDetails',
+    component: () => import(/* webpackChunkName: "bundle.team-seasons-admin" */ '../views/team-seasons-admin/TeamSeasonDetails'),
+    props: parseProps,
+  },
+  {
+    path: '/team-seasons-admin/edit/:id',
+    name: 'TeamSeasonAdminEdit',
+    component: () => import(/* webpackChunkName: "bundle.team-seasons-admin" */ '../views/team-seasons-admin/TeamSeasonEdit'),
+    props: parseProps,
+  },
+  {
+    path: '/team-seasons/index',
+    name: 'TeamSeasonIndex',
+    component: () => import(/* webpackChunkName: "bundle.team-seasons" */ '../views/team-seasons/TeamSeasonIndex'),
+  },
+  {
+    path: '/team-seasons/details/:id',
+    name: 'TeamSeasonDetails',
+    component: () => import(/* webpackChunkName: "bundle.team-seasons" */ '../views/team-seasons/TeamSeasonDetails'),
     props: parseProps,
   },
   {
