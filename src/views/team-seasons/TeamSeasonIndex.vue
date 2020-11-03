@@ -20,6 +20,7 @@
           <button
             class="btn btn-primary btn-lg"
             id="run-weekly-update"
+            @click="runWeeklyUpdate()"
           >Run Weekly Update</button>
         </p>
       </form>
@@ -128,6 +129,11 @@ export default {
       ];
 
       this.message = '';
+    },
+    runWeeklyUpdate() {
+      console.log('Running weekly update');
+
+      // TODO: Implement the logic for running a weekly update.
     },
     async selectYear() {
       this.selectedYear = parseInt(this.selectedYear);
